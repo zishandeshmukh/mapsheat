@@ -11,9 +11,15 @@ from utils.data_processing import identify_hotspots
 def reset_data_on_city_change(new_city):
     if new_city != st.session_state.selected_city:
         st.session_state.selected_city = new_city
-        st.session_state.weather_data = None
+        # We keep the data but mark it as stale instead of clearing it
+        if 'weather_data' in st.session_state and st.session_state.weather_data is not None:
+            st.session_state.data_stale = True
         st.session_state.satellite_loaded = False
         st.session_state.reports_loaded = False
+
+# Initialize data_stale if it doesn't exist
+if 'data_stale' not in st.session_state:
+    st.session_state.data_stale = False
 
 # Set page configuration
 st.set_page_config(
@@ -22,6 +28,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Add this at the beginning to stop automatic refreshing
+st.cache_resource(ttl=24*3600)
+def get_version():
+    return 1
+
+# This is a placeholder function that helps stabilize the app
+_ = get_version()
 
 # Initialize session state variables if they don't exist
 if 'weather_data' not in st.session_state:
@@ -96,6 +110,10 @@ with tab1:
     
     if st.session_state.weather_data is None:
         st.info("Click the 'Fetch Data' button to load the weather data and map.")
+    elif st.session_state.data_stale:
+        st.warning(f"You changed the city to {st.session_state.selected_city}. Click 'Fetch Data' to get updated data.")
+        if fetch_data:
+            st.session_state.data_stale = False
     
     if st.session_state.weather_data is not None:
         # Create the base map centered on the city

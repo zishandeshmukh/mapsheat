@@ -2,6 +2,10 @@
 headless = true
 address = "0.0.0.0"
 port = 5000
+runOnSave = false
+maxUploadSize = 50
+maxMessageSize = 50
+enableStaticServing = true
 
 [theme]
 primaryColor = "#4CAF50"
