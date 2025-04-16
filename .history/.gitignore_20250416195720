@@ -1,0 +1,62 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Environment variables / secrets
+.env
+
+# Local databases
+*.sqlite3
+
+# Logs
+*.log
+# Python virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folders
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# macOS
+.DS_Store
+
+# Other
+*.log
+*.sqlite3
+*.db
