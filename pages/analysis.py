@@ -360,109 +360,18 @@ with tab3:
         - Network of small parks and corridors can extend cooling effects throughout a city
         """)
         
-        # Display an image of green infrastructure
+        # Display a description of green infrastructure instead of SVG
         st.markdown("""
-        <div style="text-align: center;">
-            <svg width="700" height="300" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background sky -->
-                <rect width="700" height="300" fill="#E1F5FE" />
-                
-                <!-- Ground -->
-                <rect x="0" y="250" width="700" height="50" fill="#AED581" />
-                
-                <!-- Buildings -->
-                <g>
-                    <!-- Building 1 with green roof -->
-                    <rect x="50" y="100" width="100" height="150" fill="#B0BEC5" />
-                    <rect x="50" y="100" width="100" height="20" fill="#7CB342" /> <!-- Green roof -->
-                    
-                    <!-- Windows -->
-                    <rect x="65" y="130" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="90" y="130" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="115" y="130" width="15" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="65" y="160" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="90" y="160" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="115" y="160" width="15" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="65" y="190" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="90" y="190" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="115" y="190" width="15" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="65" y="220" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="90" y="220" width="15" height="15" fill="#E3F2FD" />
-                    <rect x="115" y="220" width="15" height="15" fill="#E3F2FD" />
-                </g>
-                
-                <!-- Building 2 with green wall -->
-                <g>
-                    <rect x="180" y="120" width="120" height="130" fill="#B0BEC5" />
-                    <!-- Green wall -->
-                    <rect x="180" y="120" width="15" height="130" fill="#7CB342" />
-                    
-                    <!-- Windows -->
-                    <rect x="205" y="135" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="235" y="135" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="265" y="135" width="20" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="205" y="160" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="235" y="160" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="265" y="160" width="20" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="205" y="185" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="235" y="185" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="265" y="185" width="20" height="15" fill="#E3F2FD" />
-                    
-                    <rect x="205" y="210" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="235" y="210" width="20" height="15" fill="#E3F2FD" />
-                    <rect x="265" y="210" width="20" height="15" fill="#E3F2FD" />
-                </g>
-                
-                <!-- Trees -->
-                <g>
-                    <!-- Tree 1 -->
-                    <circle cx="350" cy="180" r="40" fill="#66BB6A" />
-                    <rect x="345" y="220" width="10" height="30" fill="#795548" />
-                    
-                    <!-- Tree 2 -->
-                    <circle cx="420" cy="200" r="30" fill="#66BB6A" />
-                    <rect x="415" y="230" width="10" height="20" fill="#795548" />
-                    
-                    <!-- Tree 3 -->
-                    <circle cx="480" cy="190" r="35" fill="#66BB6A" />
-                    <rect x="475" y="225" width="10" height="25" fill="#795548" />
-                    
-                    <!-- Tree 4 -->
-                    <circle cx="550" cy="170" r="45" fill="#66BB6A" />
-                    <rect x="545" y="215" width="10" height="35" fill="#795548" />
-                    
-                    <!-- Tree 5 -->
-                    <circle cx="630" cy="185" r="35" fill="#66BB6A" />
-                    <rect x="625" y="220" width="10" height="30" fill="#795548" />
-                </g>
-                
-                <!-- Park area -->
-                <g>
-                    <ellipse cx="500" cy="245" rx="180" ry="15" fill="#81C784" />
-                </g>
-                
-                <!-- Cool effects visualized -->
-                <g opacity="0.5">
-                    <path d="M350,140 Q380,110 410,140 Q440,170 470,140 Q500,110 530,140" stroke="#29B6F6" stroke-width="5" fill="none" />
-                    <path d="M345,160 Q375,130 405,160 Q435,190 465,160 Q495,130 525,160" stroke="#29B6F6" stroke-width="4" fill="none" />
-                    <path d="M340,180 Q370,150 400,180 Q430,210 460,180 Q490,150 520,180" stroke="#29B6F6" stroke-width="3" fill="none" />
-                </g>
-                
-                <!-- Labels -->
-                <g font-family="Arial" font-size="10" fill="#000000">
-                    <text x="60" y="95" text-anchor="middle">Green Roof</text>
-                    <text x="180" y="110" text-anchor="start">Green Wall</text>
-                    <text x="450" y="260" text-anchor="middle">Urban Park Area</text>
-                    <text x="450" y="120" text-anchor="middle" font-size="12" font-weight="bold">Green Infrastructure for Urban Cooling</text>
-                </g>
-            </svg>
+        <div style="text-align: center; padding: 10px; background-color: #e8f5e9; border-radius: 5px;">
+            <h3>Green Infrastructure Benefits</h3>
+            <p>Green roofs, vertical gardens, and urban parks help cool cities and reduce energy consumption</p>
         </div>
         """, unsafe_allow_html=True)
+        
+        # Add a simple image description instead of SVG
+        st.image("https://via.placeholder.com/700x300?text=Green+Infrastructure+Visualization", 
+                caption="Green infrastructure including roofs, walls, and urban parks helps reduce urban heat islands", 
+                use_column_width=True)
         
         st.write("Green infrastructure not only reduces urban heat islands but also provides numerous co-benefits including improved air quality, enhanced biodiversity, and better stormwater management.")
         
