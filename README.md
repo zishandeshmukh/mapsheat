@@ -54,5 +54,4 @@ If you encounter port conflicts:
 1. Change the port in `.streamlit/config.toml`
 2. Restart the application
 
-## Note
-While this application can run locally, it's optimized for and recommended to use on Replit.
+
