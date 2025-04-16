@@ -117,7 +117,7 @@ with tab1:
             zoom_start=12,
             tiles="cartodb positron"
         )
-        folium_static(m, width=800, height=500)
+        st_folium(m, width=800, height=500)
     else:
         # Identify hotspots
         hotspots = identify_hotspots(st.session_state.community_reports)
@@ -170,7 +170,7 @@ with tab1:
                 ).add_to(m)
             
             # Display the map
-            folium_static(m, width=800, height=500)
+            st_folium(m, width=800, height=500)
             
             # Analysis of factors contributing to heat islands
             st.subheader("Contributing Factors Analysis")
