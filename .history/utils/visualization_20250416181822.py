@@ -58,70 +58,20 @@ def create_heatmap(weather_data, community_reports, radius=25):
     
     # Add heat map layer if we have data
     if heat_data:
-        # Add temperature markers
-        for point in heat_data:
-            temp = point[2]  # Temperature value
-            # Choose color based on temperature
-            if temp >= 35:
-                color = 'red'
-            elif temp >= 30:
-                color = 'orange'
-            elif temp >= 25:
-                color = 'yellow'
-            else:
-                color = 'blue'
-            
-            folium.CircleMarker(
-                location=[point[0], point[1]],
-                radius=8,
-                color=color,
-                fill=True,
-                fill_color=color,
-                fill_opacity=0.7,
-                popup=f'Temperature: {temp:.1f}°C'
-            ).add_to(m)
-        
-        # Add wind direction arrow if wind data is available
-        if 'wind' in weather_data:
-            wind_speed = weather_data['wind'].get('speed', 0)
-            wind_deg = weather_data['wind'].get('deg', 0)
-            
-            center_lat = weather_data['coord']['lat']
-            center_lon = weather_data['coord']['lon']
-            
-            folium.plugins.SemiCircle(
-                location=[center_lat, center_lon],
-                radius=1000,
-                direction=wind_deg,
-                arc=30,
-                popup=f'Wind: {wind_speed} m/s',
-                color='blue',
-                fill=True,
-                weight=2
-            ).add_to(m)
-            
-            # Add wind speed legend
-            legend_html = f'''
-                <div style="position: fixed; bottom: 150px; right: 50px; 
-                    background-color: white; padding: 10px; border: 1px solid grey;">
-                    <p><b>Wind Speed: {wind_speed} m/s</b></p>
-                    <p>Direction: {wind_deg}°</p>
-                </div>
-            '''
-            m.get_root().html.add_child(folium.Element(legend_html))
-    
-    # Add temperature legend
-    legend_html = '''
-        <div style="position: fixed; bottom: 50px; right: 50px; 
-            background-color: white; padding: 10px; border: 1px solid grey;">
-            <p><b>Temperature</b></p>
-            <p><span style="color: red;">●</span> ≥ 35°C</p>
-            <p><span style="color: orange;">●</span> 30-35°C</p>
-            <p><span style="color: yellow;">●</span> 25-30°C</p>
-            <p><span style="color: blue;">●</span> < 25°C</p>
-        </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
+        HeatMap(
+            heat_data,
+            radius=45,  # Increased radius for better visibility
+            min_opacity=0.8,
+            blur=25,
+            gradient={
+                '0.2': '#0571b0',  # Cool blue
+                '0.4': '#92c5de',  # Light blue
+                '0.6': '#f7f7f7',  # White
+                '0.8': '#f4a582',  # Light red
+                '1.0': '#ca0020'   # Hot red
+            },
+            max_zoom=15
+        ).add_to(m)
     
     # Add markers for community reports
     if not community_reports.empty:

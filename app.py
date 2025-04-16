@@ -17,7 +17,7 @@ st.set_page_config(
 )
 
 # Cache this function so it does NOT re-run on every rerender
-@st.cache_resource(ttl=3600*24)
+@st.cache_resource(ttl=60)  # Set to 1 minute refresh
 def get_app_version():
     """This function is called once at startup and helps stabilize the app"""
     return int(time.time())
@@ -33,7 +33,8 @@ def fetch_weather_data():
         if weather_data:
             st.session_state.weather_data = weather_data
             st.session_state.data_stale = False
-            st.toast(f"✅ Weather data updated for {st.session_state.selected_city}")
+            st.session_state.refresh_needed = True
+            st.rerun()
         else:
             st.error("Failed to fetch weather data. Please try again.")
 
@@ -134,14 +135,19 @@ with tab1:
         st.warning(f"You changed the city to {st.session_state.selected_city}. Click 'Fetch Data' to get updated data.")
     
     if st.session_state.weather_data is not None and not st.session_state.data_stale:
-        # Create the base map centered on the city
-        m = create_heatmap(st.session_state.weather_data, st.session_state.community_reports)
+        # Only create and display the map when data is fetched
+        st.subheader("Current Temperature Distribution")
+        
+        # Create static heatmap
+        if 'heatmap' not in st.session_state or st.session_state.get('refresh_needed', True):
+            st.session_state.heatmap = create_heatmap(st.session_state.weather_data, st.session_state.community_reports)
+            st.session_state.refresh_needed = False
         
         # Display the map
-        st.subheader("Current Temperature Distribution")
-        st_folium(m, height=600, key=f"heatmap_{APP_VERSION}")
+        st_folium(st.session_state.heatmap, height=600, key="static_heatmap")
         
-        # Display weather information
+        # Display weather information in a more prominent way
+        st.subheader(f"Temperature Details for {st.session_state.selected_city}")
         col1, col2 = st.columns(2)
         with col1:
             if 'main' in st.session_state.weather_data and 'temp' in st.session_state.weather_data['main']:
