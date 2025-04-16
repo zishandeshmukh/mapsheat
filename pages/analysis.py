@@ -31,8 +31,25 @@ with st.sidebar:
     st.write("Analyze and visualize urban heat islands in cities worldwide.")
     
     # City selection
-    city_options = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose"]
-    selected_city = st.selectbox("Select a city:", city_options, index=city_options.index(st.session_state.selected_city))
+    city_options = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose",
+                   "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow"]
+    
+    # Group cities by region
+    us_cities = city_options[:10]
+    indian_cities = city_options[10:]
+    
+    # Create region selector
+    region = st.radio("Select Region:", ["US Cities", "Indian Cities"], 
+                    index=0 if st.session_state.selected_city in us_cities else 1,
+                    horizontal=True)
+    
+    # Show appropriate city selector based on region choice
+    if region == "US Cities":
+        selected_city = st.selectbox("Select a US city:", us_cities, 
+                                  index=us_cities.index(st.session_state.selected_city) if st.session_state.selected_city in us_cities else 0)
+    else:
+        selected_city = st.selectbox("Select an Indian city:", indian_cities,
+                                  index=indian_cities.index(st.session_state.selected_city) if st.session_state.selected_city in indian_cities else 0)
     
     if selected_city != st.session_state.selected_city:
         st.session_state.selected_city = selected_city

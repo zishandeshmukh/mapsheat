@@ -12,4 +12,5 @@ dependencies = [
     "scikit-learn>=1.6.1",
     "streamlit-folium>=0.24.1",
     "streamlit>=1.44.1",
+    "trafilatura>=2.0.0",
 ]

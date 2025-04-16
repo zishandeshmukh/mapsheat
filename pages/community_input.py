@@ -57,12 +57,24 @@ with tab1:
         m.add_child(folium.LatLngPopup())
         
         # Display the map
-        map_data = folium_static(m, width=600, height=400, returned_objects=True)
+        folium_static(m, width=600, height=400)
         
-        # Check if a location was selected
-        if map_data and "last_clicked" in map_data and map_data["last_clicked"]:
-            st.session_state.selected_location = map_data["last_clicked"]
-            st.success(f"Location selected: {st.session_state.selected_location}")
+        # Add manual location selection
+        st.write("Click on the map and copy the coordinates here:")
+        col_lat, col_lon = st.columns(2)
+        with col_lat:
+            lat_input = st.text_input("Latitude", value="")
+        with col_lon:
+            lon_input = st.text_input("Longitude", value="")
+            
+        if st.button("Set Location"):
+            try:
+                lat = float(lat_input)
+                lon = float(lon_input)
+                st.session_state.selected_location = [lat, lon]
+                st.success(f"Location selected: {st.session_state.selected_location}")
+            except ValueError:
+                st.error("Please enter valid coordinates as numbers.")
         
         st.write("Or enter coordinates manually:")
         col1a, col1b = st.columns(2)
