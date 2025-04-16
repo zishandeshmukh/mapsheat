@@ -165,7 +165,7 @@ with tab2:
         report_map = create_color_coded_map(st.session_state.community_reports)
         
         # Display the map
-        folium_static(report_map, width=800, height=500)
+        st_folium(report_map, width=800, height=500)
         
         # Option to download data
         st.download_button(

@@ -59,11 +59,11 @@ def create_heatmap(weather_data, community_reports, radius=25):
             min_opacity=0.4,
             blur=15,
             gradient={
-                0.2: 'blue',
-                0.4: 'green',
-                0.6: 'yellow',
-                0.8: 'orange',
-                1.0: 'red'
+                '0.2': 'blue',
+                '0.4': 'green',
+                '0.6': 'yellow',
+                '0.8': 'orange',
+                '1.0': 'red'
             }
         ).add_to(m)
     
