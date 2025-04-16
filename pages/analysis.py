@@ -84,9 +84,36 @@ with tab1:
     if len(st.session_state.community_reports) < 3:
         st.info("We need more community temperature reports to identify heat island hotspots accurately. Please contribute by adding your observations on the Community Input page.")
         
+        # Get city location for the map
+        city_centers = {
+            "New York": [40.7128, -74.0060],
+            "Los Angeles": [34.0522, -118.2437],
+            "Chicago": [41.8781, -87.6298],
+            "Houston": [29.7604, -95.3698],
+            "Phoenix": [33.4484, -112.0740],
+            "Philadelphia": [39.9526, -75.1652],
+            "San Antonio": [29.4241, -98.4936],
+            "San Diego": [32.7157, -117.1611],
+            "Dallas": [32.7767, -96.7970],
+            "San Jose": [37.3382, -121.8863],
+            # Indian cities
+            "Mumbai": [19.0760, 72.8777],
+            "Delhi": [28.6139, 77.2090],
+            "Bangalore": [12.9716, 77.5946],
+            "Hyderabad": [17.3850, 78.4867],
+            "Chennai": [13.0827, 80.2707],
+            "Kolkata": [22.5726, 88.3639],
+            "Pune": [18.5204, 73.8567],
+            "Ahmedabad": [23.0225, 72.5714],
+            "Jaipur": [26.9124, 75.7873],
+            "Lucknow": [26.8467, 80.9462]
+        }
+        
+        city_location = city_centers.get(st.session_state.selected_city, [40.7128, -74.0060])
+        
         # Show a placeholder map
         m = folium.Map(
-            location=[40.7128, -74.0060] if st.session_state.selected_city == "New York" else [34.0522, -118.2437],
+            location=city_location,
             zoom_start=12,
             tiles="cartodb positron"
         )
