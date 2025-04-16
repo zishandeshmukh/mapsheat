@@ -57,7 +57,7 @@ with tab1:
         m.add_child(folium.LatLngPopup())
         
         # Display the map
-        st_folium(m, width=600, height=400)
+        st_folium(m, height=400)
         
         # Add manual location selection
         st.write("Click on the map and copy the coordinates here:")

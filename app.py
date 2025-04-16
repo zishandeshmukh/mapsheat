@@ -139,7 +139,7 @@ with tab1:
         
         # Display the map
         st.subheader("Current Temperature Distribution")
-        st_folium(m, width=1000, height=600, key=f"heatmap_{APP_VERSION}")
+        st_folium(m, height=600, key=f"heatmap_{APP_VERSION}")
         
         # Display weather information
         col1, col2 = st.columns(2)
