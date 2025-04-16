@@ -1,6 +1,6 @@
 import streamlit as st
 import folium
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 import pandas as pd
 import os
 from utils.api_handlers import get_weather_data
@@ -88,7 +88,7 @@ with tab1:
         
         # Display the map
         st.subheader("Current Temperature Distribution")
-        folium_static(m, width=1000, height=600)
+        st_folium(m, width=1000, height=600)
         
         # Display weather information
         col1, col2 = st.columns(2)
@@ -138,16 +138,15 @@ with tab2:
     
     city_location = city_centers.get(st.session_state.selected_city, [40.7128, -74.0060])
     
-    # Using Mapbox for basic satellite view
+    # Using a free satellite view tile provider
     m = folium.Map(
         location=city_location,
         zoom_start=12,
-        tiles="https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=" + 
-              os.getenv("MAPBOX_TOKEN", "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"),
-        attr='Mapbox'
+        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        attr='Esri World Imagery'
     )
     
-    folium_static(m, width=1000, height=600)
+    st_folium(m, width=1000, height=600)
     
     st.write("Satellite imagery can help identify surface materials that contribute to heat islands, such as dark roofs, asphalt, and areas lacking vegetation.")
 
@@ -180,7 +179,7 @@ with tab3:
                         icon=folium.Icon(color='red', icon='fire', prefix='fa')
                     ).add_to(m)
                 
-                folium_static(m, width=1000, height=400)
+                st_folium(m, width=1000, height=400)
                 
                 # Recommendations based on hotspots
                 st.subheader("Eco-Friendly Interventions")

@@ -15,7 +15,7 @@ def get_weather_data(city_name):
     Returns:
         JSON response from OpenWeatherMap API
     """
-    api_key = os.getenv("OPENWEATHERMAP_API_KEY", "d4ed9ca97c5caa95f56dfd6b96ccbb9a")  # Default key for development
+    api_key = os.getenv("OPENWEATHERMAP_API_KEY", "53b7a913cd0b89904c02cdbf5542fe37")  # Using provided API key
     
     # Base URL for OpenWeatherMap API
     base_url = "https://api.openweathermap.org/data/2.5/weather"
@@ -51,7 +51,7 @@ def get_forecast_data(city_name):
     Returns:
         JSON response from OpenWeatherMap API
     """
-    api_key = os.getenv("OPENWEATHERMAP_API_KEY", "d4ed9ca97c5caa95f56dfd6b96ccbb9a")  # Default key for development
+    api_key = os.getenv("OPENWEATHERMAP_API_KEY", "53b7a913cd0b89904c02cdbf5542fe37")  # Using provided API key
     
     # Base URL for OpenWeatherMap forecast API
     base_url = "https://api.openweathermap.org/data/2.5/forecast"

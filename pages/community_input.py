@@ -1,6 +1,6 @@
 import streamlit as st
 import folium
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 import pandas as pd
 from datetime import datetime
 import json
@@ -57,7 +57,7 @@ with tab1:
         m.add_child(folium.LatLngPopup())
         
         # Display the map
-        folium_static(m, width=600, height=400)
+        st_folium(m, width=600, height=400)
         
         # Add manual location selection
         st.write("Click on the map and copy the coordinates here:")
@@ -79,12 +79,30 @@ with tab1:
         st.write("Or enter coordinates manually:")
         col1a, col1b = st.columns(2)
         with col1a:
-            latitude = st.number_input("Latitude", min_value=-90.0, max_value=90.0, 
-                                       value=st.session_state.selected_location[0] if st.session_state.selected_location else 40.7128,
-                                       format="%.6f")
+            try:
+                default_lat = st.session_state.selected_location[0] if st.session_state.selected_location else 40.7128
+                # Validate the latitude is within bounds
+                if default_lat > 90 or default_lat < -90:
+                    default_lat = 40.7128  # Default to NYC latitude if out of bounds
+                latitude = st.number_input("Latitude", min_value=-90.0, max_value=90.0, 
+                                        value=default_lat,
+                                        format="%.6f")
+            except Exception:
+                latitude = st.number_input("Latitude", min_value=-90.0, max_value=90.0, 
+                                        value=40.7128,
+                                        format="%.6f")
         with col1b:
-            longitude = st.number_input("Longitude", min_value=-180.0, max_value=180.0, 
-                                        value=st.session_state.selected_location[1] if st.session_state.selected_location else -74.0060,
+            try:
+                default_lon = st.session_state.selected_location[1] if st.session_state.selected_location else -74.0060
+                # Validate the longitude is within bounds
+                if default_lon > 180 or default_lon < -180:
+                    default_lon = -74.0060  # Default to NYC longitude if out of bounds
+                longitude = st.number_input("Longitude", min_value=-180.0, max_value=180.0, 
+                                        value=default_lon,
+                                        format="%.6f")
+            except Exception:
+                longitude = st.number_input("Longitude", min_value=-180.0, max_value=180.0, 
+                                        value=-74.0060,
                                         format="%.6f")
     
     with col2:

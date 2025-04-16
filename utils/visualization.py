@@ -64,8 +64,7 @@ def create_heatmap(weather_data, community_reports, radius=25):
                 0.6: 'yellow',
                 0.8: 'orange',
                 1.0: 'red'
-            },
-            max_val=40,  # Adjust based on expected maximum temperature
+            }
         ).add_to(m)
     
     # Add markers for community reports
@@ -133,7 +132,18 @@ def create_color_coded_map(data_points, city_name="New York"):
         "San Antonio": [29.4241, -98.4936],
         "San Diego": [32.7157, -117.1611],
         "Dallas": [32.7767, -96.7970],
-        "San Jose": [37.3382, -121.8863]
+        "San Jose": [37.3382, -121.8863],
+        # Indian cities
+        "Mumbai": [19.0760, 72.8777],
+        "Delhi": [28.6139, 77.2090],
+        "Bangalore": [12.9716, 77.5946],
+        "Hyderabad": [17.3850, 78.4867],
+        "Chennai": [13.0827, 80.2707],
+        "Kolkata": [22.5726, 88.3639],
+        "Pune": [18.5204, 73.8567],
+        "Ahmedabad": [23.0225, 72.5714],
+        "Jaipur": [26.9124, 75.7873],
+        "Lucknow": [26.8467, 80.9462]
     }
     
     center = city_centers.get(city_name, [40.7128, -74.0060])  # Default to NYC if not found
